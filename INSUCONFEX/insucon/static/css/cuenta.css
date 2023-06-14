@@ -1,0 +1,361 @@
+.style-0 {
+    flex: 1 0 25%;
+    max-width: 25%;
+    width: 25%;
+    border-right: 1px solid rgba(119, 119, 119, 0.2);
+    padding: 10px 30px;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px;
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-1 {
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.2);
+    display: block;
+    color: rgb(36, 36, 36);
+    font-weight: 400;
+    font-style: normal;
+    font-family: Poppins, sans-serif;
+    line-height: 25.2px;
+    box-sizing: border-box;
+    margin: 0px 0px 15px;
+    padding: 0px 10px 10px 15px;
+    border: 0px;
+    vertical-align: baseline;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-2 {
+    margin-bottom: 30px;
+    display: block;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-3 {
+    list-style: outside none none;
+    --li-pl: 0;
+    --list-mb: 0;
+    --li-mb: 0;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-4 {
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-5 {
+    color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(136, 136, 136, 0.12);
+    cursor: default;
+    display: block;
+    padding: 10px 15px;
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-6 {
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-7 {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-8 {
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-9 {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-10 {
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-11 {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-12 {
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: 0px none rgb(86, 86, 86);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-13 {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+.style-14 {
+    border-bottom: 0px none rgb(86, 86, 86);
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    line-height: 25.6px;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-size: 16px;
+}
+
+.style-15 {
+    display: block;
+    padding: 10px 15px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 20px;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none solid rgba(0, 0, 0, 0.9);
+    transition: all 0.25s ease 0s;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px none rgba(0, 0, 0, 0.9);
+    vertical-align: baseline;
+    font-style: normal;
+    font-variant: normal;
+    font-stretch: 100%;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-kerning: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
