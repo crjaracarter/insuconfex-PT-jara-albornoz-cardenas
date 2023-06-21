@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+  <head>
+    <title>Checkout - Insuconfex</title>
+    {% load static %}
+    <link rel="stylesheet icon" href="{% static 'img/cora-ico.png' %}">
+    <meta property="og:title" content="Insuconfex Online Store" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+    {%load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/checkout-main.css' %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Font+Awesome+5+Free&display=swap" rel="stylesheet" />
+    
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Jost;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: 0.02;
+        line-height: 1.55;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+  </head>
+  <body>
+    {%load static %}
+    <div>
+      {%load static %}
+      <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+      <div class="home-container">
+        <div class="home-navbar">
+          <header data-role="Header" class="home-header max-width-container">
+            <div class="home-navbar1">
+              <div class="home-container01">
+                <img
+                  alt=""
+                  src="{% static 'img/lupa.png' %}"
+                  class="home-image"
+                />
+                <input
+                  type="text"
+                  placeholder="search"
+                  class="home-textinput input"
+                />
+              </div>
+              <div class="home-middle">
+                <a class="navbar-logo-title" src="#" href="{% url 'home' %}">INSUCONFEX</a>
+                <div class="home-right">
+                  <a class="navbar-link" href="{% url 'pagina_1' %}">PRODUCTOS</span>
+                  <a class="navbar-link" href="{% url 'quienes_somos' %}">NOSOTROS</span>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
+                      <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
+                    </div>
+                  {% endif %}  
+                </div> 
+              </div>
+            </div>
+              <div class="home-icons ml-5">
+                <a href="{% url 'carrito' %}">
+                  <img
+                    alt="iconsbxscart3271299"
+                    src="{% static 'img/icons8-shopping-cart-32.png' %}"
+                    class="home-image1"
+                  />
+                </a>  
+              </div>
+            
+            <div data-role="BurgerMenu" class="home-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="home-icon">
+                <path
+                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+                ></path>
+              </svg>
+            </div>
+            <div data-role="MobileMenu" class="home-mobile-menu">
+              <div class="home-nav">
+                <div class="home-container02">
+                  <a class="home-logo-center1" href="{% url 'home' %}">Insuconfex</a>
+                  <div
+                    data-role="CloseMobileMenu"
+                    class="home-close-mobile-menu"
+                  >
+                    <svg viewBox="0 0 1024 1024" class="home-icon02">
+                      <path
+                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="home-middle1">
+                  <a class="home-text01" href="{% url 'pagina_1' %}">PRODUCTOS</a>
+                  <a class="home-text02" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
+                      <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
+                    </div>
+                  {% endif %} 
+
+                  
+                  
+                </div>
+              </div>
+            </div>
+
+          </header>
+        </div>
+        <br><br><br>
+        <div class="row">
+          <div class="col-sm-6">
+              <div class="card" style="max-width: 500px">
+                  <div class="card-body">
+                      <h5 class="card-title">FACTURACIÓN Y ENVÍO</h5>
+                      <form id="checkout-form" method="post">
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                  <label for="nombre">Nombre:</label>
+                                  <input type="text" class="form-control" id="nombre" name="nombre" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="apellido">Apellido:</label>
+                                  <input type="text" class="form-control" id="apellido" name="apellido" required>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                  <label for="correo">Correo Electrónico:</label>
+                                  <input type="email" class="form-control" id="correo" name="correo" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="telefono">Teléfono:</label>
+                                  <input type="number" class="form-control" id="telefono" name="telefono" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="direccion">Dirección de envío:</label>
+                              <input type="text" class="form-control" id="direccion" name="direccion" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="ciudad">Ciudad:</label>
+                            <select class="form-control" id="ciudad" name="ciudad" required>
+                              <option value="Santiago">Santiago</option>
+                              <option value="Valparaíso">Valparaíso</option>
+                              <option value="Concepción">Concepción</option>
+                              <option value="La Serena">La Serena</option>
+                              <option value="Antofagasta">Antofagasta</option>
+                                <!-- Aquí puedes agregar opciones de ciudades -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comuna">Comuna:</label>
+                            <select class="form-control" id="comuna" name="comuna" required>
+                              <option value="Santiago">Santiago</option>
+                              <option value="Providencia">Providencia</option>
+                              <option value="Las Condes">Las Condes</option>
+                              <option value="Ñuñoa">Ñuñoa</option>
+                              <option value="La Reina">La Reina</option>
+                              <option value="La Reina">Lo Prado</option>
+                              <option value="La Reina">Maipú</option>
+
+                                <!-- Aquí puedes agregar opciones de comunas -->
+                            </select>
+                        </div>
+                          <div class="form-group">
+                              <label for="tipo_documento">Tipo de Documento:</label>
+                              <select class="form-control" id="tipo_documento" name="tipo_documento" required>
+                                  <option value="boleta">Boleta</option>
+                                  <option value="factura">Factura</option>
+                              </select>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+            
+          </div>
+          <div class="col-sm-6"> 
+            <div class="card" style="max-width: 500px;">
+              <div class="card-body">
+                <h5 class="card-title">TU PEDIDO</h5>
+                <hr> <!-- Línea separadora -->
+                <!-- Sección de los productos en el carrito -->
+                <div class="d-flex justify-content-between">
+                  <p class="card-text">Producto:</p>
+                  <p class="card-text">Subtotal:</p>
+                </div>
+                <hr> <!-- Línea separadora -->
+                {% for producto in productos_carrito %}
+                  <div class="d-flex justify-content-between">
+                      <p class="card-text">{{ producto.nombre }}</p>
+                      <p class="card-text">{{ producto.acumulado }}</p>
+                  </div>
+                {% endfor %}
+                <!-- Fin de repetición por producto -->
+                <hr> <!-- Línea separadora -->
+
+                <!-- Sección del subtotal y total de la compra -->
+                <div class="d-flex justify-content-between">
+                  <p class="card-text">SUBTOTAL:</p>
+                  <p class="card-text">{{ subtotal }}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="card-text">TOTAL:</p>
+                  <p class="card-text">{{ total }}</p>
+                </div>
+                <hr> <!-- Línea separadora -->
+                <h5 class="card-title">MÉTODO DE PAGO</h5>
+                <div class="form-group">
+                    <select id="metodo-pago" class="form-control">
+                        <option>SELECCIONE MÉTODO DE PAGO</option>
+                        <option>TRANSFERENCIA NORMAL</option>
+                        <option>TRANSBANK WEBPAY PLUS</option>
+                        <option>TRANSFERENCIA SIMPLIFICADA</option>
+                    </select>
+                    <div id="mensaje-advertencia" class="text-danger mt-2" style="display: none;">
+                        Debes ingresar el RUT de la cuenta corriente o vista con que pagarás, luego se te entregarán todos los datos para que puedas realizar la transferencia desde el portal web o móvil de tu banco. Debes tener cuidado, el monto a transferir debe ser el que se te ha informado que realices, así el pago se procesará con éxito.
+                    </div>
+                </div>
+                <a id="finalizar-pedido-btn" class="btn btn-primary" href="{% url 'finalizar_compra' %}">Finalizar Pedido</a>
+            </div>
+        </div>
+    </div>
+              
+</div>
+        <br>
+        <div class="row mt-6">
+          <div class="col-sm-12">
+            <div class="card" style="max-width: 500px;">
+              <div class="card-body">
+                <h5 class="card-title">INFORMACIÓN ADICIONAL</h5>
+                <div class="form-group">
+                  <label for="notas">Notas del pedido:</label>
+                  <textarea class="form-control" id="notas" name="notas" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          document.getElementById("finalizar-pedido-btn").addEventListener("click", function(event) {
+              var form = document.getElementById("checkout-form");
+              if (!form.checkValidity()) {
+                  event.preventDefault();
+                  event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+          });
+      </script>
+      
+      <script>
+        document.getElementById("metodo-pago").addEventListener("change", function() {
+            var mensajeAdvertencia = document.getElementById("mensaje-advertencia");
+            if (this.value === "TRANSFERENCIA NORMAL") {
+                mensajeAdvertencia.style.display = "block";
+            } else {
+                mensajeAdvertencia.style.display = "none";
+            }
+        });
+    
+        document.getElementById("finalizar-pedido-btn").addEventListener("click", function(event) {
+            var form = document.getElementById("checkout-form");
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+    </script>
+        
+
+        
+
+    
+        
+       
+        <br>
+        <div class="home-footer">
+          <div class="max-width-container">
+            <footer class="home-footer1">
+              <div class="home-container09">
+                <h3 class="home-text2 Heading-3">Insuconfex</h3>
+              </div>
+              <div class="col-lg-2">
+                <img src="{% static 'img/cora-ico.png' %}" alt="logoinsucon" width="30px"> <!--CRISTIAN: LOGO DE INSUCONFEX -->
+            </div>
+              <div class="home-links-container">
+                <div class="home-container10">
+                  <span class="home-text2">Acerca De</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">información Empresa</a>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Productos</a>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Proveedores</a>
+                </div>
+                <div class="home-container10">
+                  <span class="home-text2">Cuenta</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'login' %}">Início de sesión</a>
+                  <a class="home-text1" href="{% url 'registro' %}" >Registrarse</a>
+
+                </div>
+                <div class="home-container10">
+                  <span class="home-text2">Contacto</span>
+                  <br>
+                  <span class="home-text1">(671) 555-0110</span>
+                  <span class="home-text1">contact@Insuconfex.com</span>
+                  <span class="home-text1">1234 Calle Falsa. La Pintana, Santiago, RM</span>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+  </body>
+</html>
+
+
+
+  <div class="col-sm-6"> 
+      <div class="card" style="max-width: 500px;">
+          <div class="card-body">
+              <h5 class="card-title">TU PEDIDO</h5>
+              <hr> <!-- Línea separadora -->
+              <!-- Sección de los productos en el carrito -->
+              <div class="d-flex justify-content-between">
+                  <p class="card-text">Producto:</p>
+                  <p class="card-text">Subtotal:</p>
+              </div>
+              <hr> <!-- Línea separadora -->
+              {% for producto in productos_carrito %}
+              <div class="d-flex justify-content-between">
+                  <p class="card-text">{{ producto.nombre }}</p>
+                  <p class="card-text">{{ producto.acumulado }}</p>
+              </div>
+              {% endfor %}
+              <!-- Fin de repetición por producto -->
+              <hr> <!-- Línea separadora -->
+
+              <!-- Sección del subtotal y total de la compra -->
+              <div class="d-flex justify-content-between">
+                  <p class="card-text">SUBTOTAL:</p>
+                  <p class="card-text">{{ subtotal }}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                  <p class="card-text">TOTAL:</p>
+                  <p class="card-text">{{ total }}</p>
+              </div>
+              <hr> <!-- Línea separadora -->
+              <h5 class="card-title">MÉTODO DE PAGO</h5>
+              <div class="form-group">
+                  <select class="form-control">
+                      <option>TRANSBANK WEBPAY PLUS</option>
+                      <option>TRANSFERENCIA SIMPLIFICADA</option>
+                      <option>TRANSFERENCIA NORMAL</option>
+                  </select>
+              </div>
+              <button id="finalizar-pedido-btn" class="btn btn-primary">Finalizar Pedido</button>
+          </div>
+      </div>
+  </div>          
+</div>
+<br>
+<div class="row mt-6">
+  <div class="col-sm-12">
+      <div class="card" style="max-width: 500px;">
+          <div class="card-body">
+              <h5 class="card-title">INFORMACIÓN ADICIONAL</h5>
+              <div class="form-group">
+                  <label for="notas">Notas del pedido:</label>
+                  <textarea class="form-control" id="notas" name="notas" rows="4"></textarea>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("finalizar-pedido-btn").addEventListener("click", function(event) {
+      var form = document.getElementById("checkout-form");
+      if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+  });
+</script>

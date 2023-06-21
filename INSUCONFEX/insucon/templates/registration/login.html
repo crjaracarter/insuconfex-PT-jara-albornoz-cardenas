@@ -96,23 +96,44 @@
                 />
               </div>
               <div class="home-middle">
-                <span class="navbar-logo-title" src="#">INSUCONFEX</span>
+                <a class="navbar-logo-title" src="#" href="{% url 'home' %}">INSUCONFEX</a>
                 <div class="home-right">
-                  <a class="navbar-link" href="{% url 'home' %}">INICIO</span>
-                    <a class="navbar-link" href="{% url 'catalogo' %}">PRODUCTOS</span>
-                  <a class="navbar-link" href="{% url 'quienes_somos' %}">ACERCA DE</span>
-                  <li class="nav-item dropdown">
+                  <a class="navbar-link" href="{% url 'pagina_1' %}">PRODUCTOS</span>
+                  <a class="navbar-link" href="{% url 'quienes_somos' %}">NOSOTROS</span>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
                     <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
                       <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
                     </div>
-                  </li>
-                </div>
+                  {% endif %}  
+                </div> 
               </div>
             </div>
-
-
+              <div class="home-icons ml-5">
+                <a href="{% url 'carrito' %}">
+                  <img
+                    alt="iconsbxscart3271299"
+                    src="{% static 'img/icons8-shopping-cart-32.png' %}"
+                    class="home-image1"
+                  />
+                </a>  
+              </div>
+            
             <div data-role="BurgerMenu" class="home-burger-menu">
               <svg viewBox="0 0 1024 1024" class="home-icon">
                 <path
@@ -123,7 +144,7 @@
             <div data-role="MobileMenu" class="home-mobile-menu">
               <div class="home-nav">
                 <div class="home-container02">
-                  <span class="home-logo-center1">Insuconfex</span>
+                  <a class="home-logo-center1" href="{% url 'home' %}">Insuconfex</a>
                   <div
                     data-role="CloseMobileMenu"
                     class="home-close-mobile-menu"
@@ -136,12 +157,32 @@
                   </div>
                 </div>
                 <div class="home-middle1">
-                  <span class="home-text06">SHOP</span>
-                  <span class="home-text07">LOOKBOOK</span>
-                  <span class="home-text08">SPECIAL</span>
-                  <span class="home-text09">ABOUT</span>
-                  <span class="home-text10">BLOG</span>
-                  <span class="home-text11">CONTACT</span>
+                  <a class="home-text01" href="{% url 'pagina_1' %}">PRODUCTOS</a>
+                  <a class="home-text02" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
+                      <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
+                    </div>
+                  {% endif %} 
+
+                  
+                  
                 </div>
               </div>
             </div>
@@ -155,34 +196,32 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="#" method="POST">
-          {% csrf_token %}
+          
           
 					<span class="login100-form-title p-b-26">
-						¡Bienvenid@! Inicia Sesión para continuar
+						¡Hola! Inicia Sesión para continuar
 					</span>
           <hr>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
-					</div>
+					{% csrf_token %}
+          {{ form | crispy }}
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Contraseña"></span>
-					</div>
-
-					<div class="container-login100-form-btn">
+					<!-- <div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" type="submit" value="ingresar" href="{% url 'home' %}">
+              <input class="login100-form-btn" type="submit" value="Ingresar" role="button">
+							 <a role="button" class="login100-form-btn" type="submit" value="ingresar" href="{% url 'home' %}">
 								Entrar
-              </button>
+              </a> 
 						</div>
-					</div>
-
+					</div> -->
+          <div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" type="submit" value="Ingresar" role="input">
+								Ingresar
+							</button>
+            </div>
+          </div>
 					<div class="text-center p-t-115">
 						<span class="txt1">
 							¿No tienes una cuenta?
@@ -228,9 +267,9 @@
           <div class="home-links-container">
             <div class="home-container10">
               <span class="home-text2">Acerca De</span>
-              <span class="home-text1">información Empresa</span>
-              <span class="home-text1">Información Productos</span>
-              <span class="home-text1">Información Proveedores</span>
+              <a class="home-text1" href="{% url 'quienes_somos' %}">información Empresa</a>
+              <a class="home-text1" href="{% url 'quienes_somos' %}">Información Productos</a>
+              <a class="home-text1" href="{% url 'quienes_somos' %}">Información Proveedores</a>
             </div>
             <div class="home-container10">
               <span class="home-text2">Cuenta</span>

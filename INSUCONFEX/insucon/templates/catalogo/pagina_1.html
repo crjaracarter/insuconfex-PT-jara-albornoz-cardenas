@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-CL">
   <head>
-    <title>Insuconfex</title>
+    <title>Catalogo - Insuconfex</title>
     {% load static %}
     <link rel="stylesheet icon" href="{% static 'img/cora-ico.png' %}">
     <meta property="og:title" content="Insuconfex Online Store" />
@@ -14,6 +14,8 @@
     
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -51,6 +53,28 @@
       data-tag="font"
     />
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+    <style>
+      .card {
+        max-width: 100px; /* Ajusta el ancho máximo de la tarjeta */
+      }
+    
+      
+    
+      .card-title {
+        font-size: 18px; /* Ajusta el tamaño de fuente del título */
+      }
+    
+      .card-text {
+        font-size: 14px; /* Ajusta el tamaño de fuente del texto */
+      }
+    
+      .card-price {
+        font-size: 16px; /* Ajusta el tamaño de fuente del precio */
+      }
+    </style>
+
+    
   </head>
   <body>
     {%load static %}
@@ -68,30 +92,50 @@
                   src="{% static 'img/lupa.png' %}"
                   class="home-image"
                 />
-                <input
-                  type="text"
-                  placeholder="search"
-                  class="home-textinput input"
-                />
+                <form method="POST">
+                  {% csrf_token %}
+                <input type="text" placeholder="search" class="home-textinput input" id="buscador" name="buscador"/>
+              </form>
               </div>
               <div class="home-middle">
-                <span class="navbar-logo-title" src="#">INSUCONFEX</span>
+                <a class="navbar-logo-title" src="#" href="{% url 'home' %}">INSUCONFEX</a>
                 <div class="home-right">
-                  <a class="navbar-link" href="{% url 'home' %}">INICIO</span>
-                    <a class="navbar-link" href="{% url 'pagina_1' %}">PRODUCTOS</span>
-                  <a class="navbar-link" href="{% url 'quienes_somos' %}">ACERCA DE</span>
-                  <li class="nav-item dropdown">
+                  <a class="navbar-link" href="{% url 'pagina_1' %}">PRODUCTOS</span>
+                  <a class="navbar-link" href="{% url 'quienes_somos' %}">NOSOTROS</span>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
                     <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
                       <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
                     </div>
-                  </li>
-                </div>
+                  {% endif %}  
+                </div> 
               </div>
             </div>
-
-
+              <div class="home-icons ml-5">
+                <a href="{% url 'carrito' %}">
+                  <img
+                    alt="iconsbxscart3271299"
+                    src="{% static 'img/icons8-shopping-cart-32.png' %}"
+                    class="home-image1"
+                  />
+                </a>  
+              </div>
+            
             <div data-role="BurgerMenu" class="home-burger-menu">
               <svg viewBox="0 0 1024 1024" class="home-icon">
                 <path
@@ -102,7 +146,7 @@
             <div data-role="MobileMenu" class="home-mobile-menu">
               <div class="home-nav">
                 <div class="home-container02">
-                  <span class="home-logo-center1">Insuconfex</span>
+                  <a class="home-logo-center1" href="{% url 'home' %}">Insuconfex</a>
                   <div
                     data-role="CloseMobileMenu"
                     class="home-close-mobile-menu"
@@ -115,12 +159,32 @@
                   </div>
                 </div>
                 <div class="home-middle1">
-                  <span class="home-text06">SHOP</span>
-                  <span class="home-text07">LOOKBOOK</span>
-                  <span class="home-text08">SPECIAL</span>
-                  <span class="home-text09">ABOUT</span>
-                  <span class="home-text10">BLOG</span>
-                  <span class="home-text11">CONTACT</span>
+                  <a class="home-text01" href="{% url 'pagina_1' %}">PRODUCTOS</a>
+                  <a class="home-text02" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  {% if user.is_authenticated %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
+                    {% if user.is_superuser %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cuenta' %}">MI CUENTA</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
+                    </div>
+                    {% endif %}
+                  {% else %}
+                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">CUENTA</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'login' %}">INICIAR SESION</a>
+                      <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
+                    </div>
+                  {% endif %} 
+
+                  
+                  
                 </div>
               </div>
             </div>
@@ -134,80 +198,7 @@
     <div class="home-main">
         
         <div class="section-container column">
-          <div class="max-width-container">
-            <div class="section-heading-section-heading">
-              <h1 class="section-heading-text Heading-2">
-                <span>COMPRA POR CATEGORIAS</span>
-              </h1>
-              <span class="section-heading-text1 ">
-                <span>
-                  Comienza a comprar basado en categorias que te interesen
-                </span>
-                <br>
-              </span>
-              <br>
-            </div>
 
-
-            <div class="home-cards-container">
-              <div class="category-card-category-card">
-                <a class="category-card-text"><a href="{% url 'desinfectantes' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/Alcohol-desinfectante.jpg'%}"
-                  class="category-card-image"
-                /></a>
-                Desinfectantes</a>
-              </div>
-              <div class="category-card-category-card">
-                <a class="category-card-text"><a href="{% url 'material_quirurgico' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/pinza.png' %}"
-                  class="category-card-image"
-                /></a>
-                Material Quirúrgico</a>
-              </div>
-              <div class="category-card-category-card">
-                <a class="category-card-text" ><a href="{% url 'via_venosa' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/Aguja-Mariposa.jpg' %}"
-                  class="category-card-image"
-                /></a>
-                Vía venosa</a>
-              </div>
-              <div class="category-card-category-card">
-                <a class="category-card-text" ><a href="{% url 'via_aerea' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/canulas-orofaringeas.jpg' %}"
-                  class="category-card-image"
-                /></a>
-                Vía Aérea</a>
-              </div>
-              <div class="category-card-category-card">
-                <a class="category-card-text" ><a href="{% url 'tratamiento_heridas' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/gasa-no-tejida.jpg' %}"
-                  class="category-card-image"
-                /></a>
-                Tratamiento de heridas</a>
-              </div>
-              <div class="category-card-category-card" >
-                <a class="category-card-text "><a href="{% url 'guantes' %}">
-                <img
-                  alt="image"
-                  src="{% static 'img/guantes-nitrilo.jpg' %}"
-                  class="category-card-image" 
-                /></a>
-                Guantes</a>
-              </div>
-            </div>
-
-            
-          </div>
           <div class="home-banner">
             <div class="home-container05">
               <h3 class="home-text19 Heading-3">INSUCONFEX</h3>
@@ -217,456 +208,128 @@
               </span>
             </div>
           </div>
+
+
+<br><br>
+
+
+
+
+          <div class="max-width-container my-4">
+            <div class="section-heading-section-heading">
+              <h1 class="section-heading-text Heading-2">
+                <span>NUESTROS PRODUCTOS</span>
+              </h1>
+              <span class="section-heading-text1 ">
+                <span>
+                  Revisa nuestro catalogo de productos
+                </span>
+
+              </span>
+             
+            </div>
+
+
+  
+
+
+
+
+
+
+            
+
+            
+          
           
         </div>
-        <div class="section-container">
-          <div class="max-width-container">
-            <div
-              class="section-heading-section-heading section-heading-root-class-name"
-            >
-              <h1 class="section-heading-text Heading-2">
-                <span>¡Nuestros Productos!</span>
-              </h1>
-              <br>
-              <br>
-            </div>
-            <div class="home-container08">
 
-              <div
-                class="blog-post-card-blog-post-card blog-post-card-root-class-name"
-              >
-                <img
-                  alt="image"
-                  src="{% static 'img/Alcohol-desinfectante.jpg' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Alcohol Desnaturalizado</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Alcohol desnaturalizado 70% 250ml marca DifemPharma
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src= "{% static 'img/CANULA-DE-GUEDEL-90mm.jpg ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Canula guedel 90MM tamaño Nro 4</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Cánula Guedel desechable tamaño 4 o Medium para dulto, color amarillo
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src="{% static 'img/jeringa_luer_lock_20ml.png ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Jeringa 20ml desechable - caja de 50</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Jeringa 20ml desechable Luer Lock 21G x 1 1/2 - Caja de 50
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
+        <br><br>
+
+        
 
 
-
+        <div class="row">
+          {% for p in entity %}
+            <div class="col-md-4">
+              <div class="home-cards-container category-card-category-card">
+                <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}" class="card-img-top" height="500">
+                <div class="card-body my-5 mx-5 ">
+                  <h5 class="card-title text-center">{{ p.nombre }}</h5>
+                  <p class="card-text text-center">{{ p.descripcion }}</p>
+                  <p class="card-price text-center my-2">Precio: ${{ p.precio }}</p>
+                  <p class="card-price text-center my-2">Stock: {{ p.stock }}</p>
+                  
+                  {% if p.stock > 0 %}
+                    <form action="{% url 'Add' p.id %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" class="form-control" min="1" max="{{ p.stock }}">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                    </form>
+                  {% else %}
+                    <button class="btn btn-primary" disabled>Agregar al carrito</button>
+                  {% endif %}
                 </div>
               </div>
             </div>
-            <br>
-            <br>
-            <div class="home-container08">
-
-              <div
-                class="blog-post-card-blog-post-card blog-post-card-root-class-name"
-              >
-                <img
-                  alt="image"
-                  src="{% static 'img/gasa-no-tejida-esteril-7.5x7.5.jpg' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Gasa Algodón esteril 7,5 x 7,5</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Gasa Algodón estéril 7,5 x 7,5 cm 8 pliegues Caja 50 unids
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src= "{% static 'img/Canula-Guedel-110-MM-tamano-6.jpg ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Cánula guedel 110MM tamaño Nro 6</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Cánula Guedel desechable tamaño 6 o XL, color naranjo para adultos 
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src="{% static 'img/tubo-canula-0.png ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Cánula guedel 50MM tamaño Nro 0</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Cánula Guedel desechable tamaño 0 para infante, color azul
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-
-
-
-                </div>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="home-container08">
-
-              <div
-                class="blog-post-card-blog-post-card blog-post-card-root-class-name"
-              >
-                <img
-                  alt="image"
-                  src="{% static 'img/Canula-Guedel-40-MM-tamano-00.jpg' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Cánula guedel 40MM tamaño Nro 00</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Cánula Berman desechable tamaño 00, color Rosado para recién nacido
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src= "{% static 'img/set-de-administracion-soluciones-endovenosas.jpg ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Set de administración de soluciones</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Set de administración soluciones endovenosas con toma aire
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src="{% static 'img/jeringa-luer-lock-5ml.png ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Jeringa 5ml luer lock - caja de 100</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Jeringa 5ml Luer Lock con aguja calibre 21G x 1 1/2 – Caja de 100
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-
-
-
-                </div>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="home-container08">
-
-              <div
-                class="blog-post-card-blog-post-card blog-post-card-root-class-name"
-              >
-                <img
-                  alt="image"
-                  src="{% static 'img/scalp-vein-3.jpg' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Scalp Vein 21G - caja de 100</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Scalp Vein 21G - caja de 100
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src= "{% static 'img/guantes-nitrilo.jpg ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Guante de Nitrilo talla XL</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Guante de Nitrilo XL caja 100 unidades color Azul
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src="{% static 'img/guantes-nitrilo.jpg ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Guantes de Nitrilo talla L</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Guante de Nitrilo L caja 100 unidades color Azul
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-
-
-
-                </div>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="home-container08">
-
-              <div
-                class="blog-post-card-blog-post-card blog-post-card-root-class-name"
-              >
-                <img
-                  alt="image"
-                  src="{% static 'img/gasa-7.5x7.5-caja-50.png' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Gasa 7,5 x 7,5 cm no tejida caja 50 unidades</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Gasa 7.5 x 7.5 cm no tejida Estéril 2u x sobre caja 50 unids – Cranberry 
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src= "{% static 'img/balsamico.png ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Jabón neutro</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Jabón Neutro Balsámico Sin Aroma 340 ml
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img
-                  alt="image"
-                  src="{% static 'img/tela-transpore-caja-12.png ' %}"
-                  class="blog-post-card-image"
-                />
-                <div class="blog-post-card-container">
-                  <span class="blog-post-card-text">
-                    <span>Tela Transpore 3M - caja 12 unidades</span>
-                  </span>
-                  <span class="blog-post-card-text1">
-                    <span>
-                      Tela Transpore 3M 2.5cm x 9,1 mts - caja 12 unids
-                    </span>
-                  </span>
-                  <a
-                    href=""
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="button"
-                  >
-                  Más información
-                  </a>
-
-
-
-                </div>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div>
-              <a type="button" class="btn btn-default" href="">1</a>
-              <a type="button" class="btn btn-default" href="{% url 'pagina_2' %}">2</a>
-              <a type="button" class="btn btn-default" href="{% url 'pagina_3' %}">3</a>
-              <a type="button" class="btn btn-link" href="{% url 'pagina_2' %}">Siguiente</a>
-            </div>
-
-          </div>
+          {% endfor %}
         </div>
+        <br>
+        <br>
+        
+        {% if paginator.num_pages > 1%}
+        <div class="d-flex justify-content-center">
+          <ul class="pagination">
+            {% if entity.has_previous %}
+              <li class="page-item d-none d-sm-block">
+                <a class="page-link" href="?page={{ entity.previous_page_number }}#pagtable">Anterior</a>
+              </li>
+            {% endif %}
+            {% for page in paginator.page_range %}
+              {% if forloop.last and page != entity.number and paginator.num_pages > 7 %}
+                {% if entity.next_page_number != paginator.num_pages %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ entity.number | add:1}}#pagtable">...</a>
+                  </li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{paginator.num_pages}}#pagtable">{{paginator.num_pages}}</a>
+                </li>
+              {% endif %}
+              {% if page == entity.number and page > 7 %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page | add:-1 }}#pagtable">...</a>
+                </li>
+              {% endif %}
+              {% if page < 7 or page == entity.number %}
+                <li class="page-item {% if page == entity.number %}active{% endif %}">
+                  <a class="page-link" href="?page={{ page }}#pagtable">{{ page }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if entity.has_next %}
+              <li class="page-item d-none d-sm-block">
+                <a class="page-link" href="?page={{ entity.next_page_number }}#pagtable">Siguiente</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="d-flex justify-content-center d-sm-none">            
+          {% if entity.has_previous %}
+            <span class="page-item"><a class="page-link" href="?page={{ entity.previous_page_number }}#pagtable">Anterior</a></span>
+          {% endif %}
+          {% if entity.has_next %}
+            <span class="page-item"><a class="page-link" href="?page={{ entity.next_page_number }}#pagtable">Siguiente</a></span>
+          {% endif %}
+          <br>
+          <br>
+        </div>
+        {% endif %}
       </div>
-
-      
+    </div>
         
         
 
@@ -683,9 +346,9 @@
               <div class="home-links-container">
                 <div class="home-container10">
                   <span class="home-text2">Acerca De</span>
-                  <span class="home-text1">información Empresa</span>
-                  <span class="home-text1">Información Productos</span>
-                  <span class="home-text1">Información Proveedores</span>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">información Empresa</a>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Productos</a>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Proveedores</a>
                 </div>
                 <div class="home-container10">
                   <span class="home-text2">Cuenta</span>

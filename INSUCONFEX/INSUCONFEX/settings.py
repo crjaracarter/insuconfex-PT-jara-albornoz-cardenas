@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
+AUTH_PROFILE_MODULE = 'insucon.UserProfile'
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL ='/'
@@ -63,6 +65,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'INSUCONFEX.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'insucon.context_processors.total_carrito',
             ],
         },
     },

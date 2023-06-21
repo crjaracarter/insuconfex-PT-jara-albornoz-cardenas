@@ -1,3 +1,26 @@
+.card-large-width {
+  max-width: 5000px; /* Ajusta el valor según tus necesidades */
+}
+
+.card-small-width {
+  max-width: 200px; /* Ajusta el valor según tus necesidades */
+}
+
+.card-small-width .card-img-top {
+  max-height: 150px; /* Ajusta el valor según tus necesidades */
+  object-fit: cover;
+}
+
+.card-image-container {
+  max-height: 200px; /* Ajusta el valor según tus necesidades */
+  overflow: hidden;
+}
+
+.card-image-container img {
+  width: 100%;
+  height: auto;
+}
+
 .section-heading-section-heading {
   display: flex;
   position: relative;
@@ -28,6 +51,8 @@
 .category-card-category-card:hover {
   color: var(--dl-color-pallet-yellow);
   transform: scale(1.2);
+  margin-left: 100px;
+  margin-right: 100px;
 }
 .category-card-image {
   width: 120px;
