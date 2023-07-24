@@ -24,7 +24,12 @@ class ProveedorForm(forms.ModelForm):
         fields = '__all__'
 
 class UsuarioForm(forms.ModelForm):
+    nombre = forms.CharField(max_length=50)
+    apellido = forms.CharField(max_length=50)
+    celular = forms.CharField(max_length=20)
+    direccion = forms.CharField(max_length=100)
+    comuna = forms.CharField(max_length=50)
 
     class Meta:
         model = UserProfile
-        fields = '__all__'
+        fields = [ 'nombre', 'apellido', 'celular', 'direccion', 'comuna']

@@ -64,16 +64,11 @@
           <header data-role="Header" class="home-header max-width-container">
             <div class="home-navbar1">
               <div class="home-container01">
-                <img
-                  alt=""
-                  src="{% static 'img/lupa.png' %}"
-                  class="home-image"
-                />
-                <input
-                  type="text"
-                  placeholder="search"
-                  class="home-textinput input"
-                />
+                <form method="POST" class="form-inline">
+                  {% csrf_token %}
+                  <input type="search" placeholder="¿Qué quieres buscar?" class="form-control mr-sm-2" id="buscador" name="buscador" aria-label="Search"/>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
               </div>
               <div class="home-middle">
                 <a class="navbar-logo-title" src="#" href="{% url 'home' %}">INSUCONFEX</a>
@@ -137,8 +132,15 @@
                   </div>
                 </div>
                 <div class="home-middle1">
-                  <a class="home-text01" href="{% url 'pagina_1' %}">PRODUCTOS</a>
-                  <a class="home-text02" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  <form method="POST" class="form-inline">
+                    {% csrf_token %}
+                    <input type="search" placeholder="¿Qué quieres buscar?" class="form-control mr-sm-2" id="buscador" name="buscador" aria-label="Search"/>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                  </form>
+                  
+                  <a class="home-text02" href="{% url 'pagina_1' %}">PRODUCTOS</a>
+                  <a class="home-text03" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  
                   {% if user.is_authenticated %}
                     <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
                     {% if user.is_superuser %}
@@ -160,9 +162,16 @@
                       <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
                     </div>
                   {% endif %} 
-
-                  
-                  
+                  <div class="home-text03">
+                    <a class="btn btn-warning" href="{% url 'carrito' %}">
+                      <img
+                        alt="iconsbxscart3271299"
+                        src="{% static 'img/icons8-shopping-cart-32.png' %}"
+                        class="home-image1"
+                         
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -270,22 +279,25 @@
             </div>
               <div class="home-links-container">
                 <div class="home-container10">
-                  <span class="home-text2" >Acerca De</span>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">información Empresa</a>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Productos</a>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Proveedores</a>
+                  <span class="home-text2">Nosotros</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">¿Quiénes Somos?</a>
+                  <a class="home-text1" href="{% url 'pagina_1' %}">Nuestros Productos</a>
+                  
                 </div>
                 <div class="home-container10">
-                  <span class="home-text2">Cuenta</span>
-                  <a class="home-text1" href="{% url 'login' %}">Início de sesión</a>
+                  <span class="home-text2">Tu Cuenta</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'login' %}">Iniciar Sesión</a>
                   <a class="home-text1" href="{% url 'registro' %}" >Registrarse</a>
 
                 </div>
                 <div class="home-container10">
                   <span class="home-text2">Contacto</span>
-                  <span class="home-text1">(671) 555-0110</span>
+                  <br>
+                  <span class="home-text1">(2) 2560 6900</span>
                   <span class="home-text1">contact@Insuconfex.com</span>
-                  <span class="home-text1">1234 Calle Falsa. La Pintana, Santiago, RM</span>
+                  <span class="home-text1">Av. Esq. Blanca 501, Maipú, Región Metropolitana</span>
                 </div>
               </div>
             </footer>

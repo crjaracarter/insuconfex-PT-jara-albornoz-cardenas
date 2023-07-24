@@ -11,9 +11,14 @@ from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from insucon.Carrito import Carrito
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.views.generic import FormView
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core import mail
+
 
 
 # Create your views here.
@@ -46,25 +51,30 @@ def registro(request):
 
 
 def quienes_somos(request):
-    mensaje_enviado = False
-
-    if request.method == 'POST':
+    if request.POST:
         nombre = request.POST.get('nombre')
         correo = request.POST.get('correo')
         mensaje = request.POST.get('mensaje')
 
-        # Realiza cualquier acción necesaria con los datos
-        # Por ejemplo, enviar un correo electrónico
+        send_mail(
+            'Nuevo mensaje de contacto - INSUCONFEX',
+            f'Nombre: {nombre}\nCorreo: {correo}\nMensaje: {mensaje}',
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.DEFAULT_FROM_EMAIL],
+            fail_silently=False,
+        )
 
-        mensaje_enviado = True
+        messages.success(request, 'Tu mensaje ha sido enviado correctamente.')
 
-    return render(request, 'quienes_somos.html', {'mensaje_enviado': mensaje_enviado})
+        return redirect('quienes_somos')
+
+    return render(request, 'quienes_somos.html')
 
 def catalogo(request):
     return render(request,"catalogo.html")
 
 def pagina_1(request):
-    busqueda = request.POST.get("buscador")
+    busqueda = request.GET.get("buscador")
     productos = Producto.objects.all()
 
     if busqueda:
@@ -151,47 +161,50 @@ def listar_usuario(request):
 
 def agregar_usuario(request):
     data = {
-        'form': UsuarioForm()
+        'form': CustomUserCreationForm()
     }
-    formulario = None 
+
     if request.method == 'POST':
-        formulario =UsuarioForm(data=request.POST, files=request.FILES)
+        formulario = CustomUserCreationForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "guardado correctamente"
-        else:
-            data["form"] = formulario
-    return render(request, "cuenta-user/cuenta/agregar-usuario.html", data)
+            # Guardar el usuario administrador actual
+            admin_user = request.user
+
+            # Crear el nuevo usuario
+            user = formulario.save()
+
+            # Restaurar la sesión del administrador
+            login(request, admin_user)
+
+            messages.success(request, 'Te has registrado correctamente')
+            return redirect('listar_usuario')
+        
+        data['form'] = formulario
+    return render(request, 'cuenta-user/cuenta/agregar-usuario.html', data)
 
 def eliminar_usuario(request, id):
     usuario = get_object_or_404(UserProfile, id=id)
     usuario.delete()
     messages.success(request, "el usuario a sido eliminado")
-    return redirect(to="usuario")
+    return redirect(to="listar_usuario")
 
-def modificar_cuenta_2(request):
+def modificar_cuenta_2(request, id):
+    perfil = get_object_or_404(UserProfile, id=id)
+
     if request.method == 'POST':
-        user = request.user
+        form = UsuarioForm(request.POST, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_usuario')
+    else:
+        form = UsuarioForm(instance=perfil)
 
-        # Verificar si el perfil de usuario existe
-        if hasattr(user, 'userprofile'):
-            perfil = user.userprofile
-        else:
-            # Si no existe, manejar el caso según tus necesidades
-            # por ejemplo, crear un nuevo perfil o mostrar un mensaje de error
-            perfil = UserProfile.objects.create(user=user)
+    context = {
+        'form': form,
+        'perfil': perfil
+    }
 
-        # Actualizar y guardar el perfil de usuario
-        perfil.celular = request.POST.get('celular', '')
-        perfil.direccion = request.POST.get('direccion', '')
-        perfil.comuna = request.POST.get('comuna', '')
-        perfil.nombre = request.POST.get('nombre', '')
-        perfil.apellido = request.POST.get('apellido', '')
-        perfil.save()
-
-        return redirect(reverse('detalles_cuenta_2'))  # Redirigir a la página de perfil del usuario o donde desees
-
-    return render(request, 'cuenta-user/cuenta/modificar-cuenta-2.html')
+    return render(request, 'cuenta-user/cuenta/modificar-cuenta-2.html', context)
 
 
 def detalles_cuenta_2(request):
@@ -208,29 +221,23 @@ def detalles_cuenta_2(request):
     return render(request, 'cuenta-user/detalles-cuenta-2.html', {'perfil': perfil})
 
 
-def modificar_cuenta(request):
+def modificar_cuenta(request, pk):
+    perfil = get_object_or_404(UserProfile, id=pk)
+
     if request.method == 'POST':
-        user = request.user
+        form = UsuarioForm(request.POST, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('detalles_cuenta'))
+    else:
+        form = UsuarioForm(instance=perfil)
 
-        # Verificar si el perfil de usuario existe
-        if hasattr(user, 'userprofile'):
-            perfil = user.userprofile
-        else:
-            # Si no existe, manejar el caso según tus necesidades
-            # por ejemplo, crear un nuevo perfil o mostrar un mensaje de error
-            perfil = UserProfile.objects.create(user=user)
+    context = {
+        'form': form,
+        'perfil': perfil
+    }
 
-        # Actualizar y guardar el perfil de usuario
-        perfil.celular = request.POST.get('celular', '')
-        perfil.direccion = request.POST.get('direccion', '')
-        perfil.comuna = request.POST.get('comuna', '')
-        perfil.nombre = request.POST.get('nombre', '')
-        perfil.apellido = request.POST.get('apellido', '')
-        perfil.save()
-
-        return redirect(reverse('detalles_cuenta'))  # Redirigir a la página de perfil del usuario o donde desees
-
-    return render(request, 'cuenta-user/cuenta/modificar-cuenta.html')
+    return render(request, 'cuenta-user/cuenta/modificar-cuenta.html', context)
 
 
 def detalles_cuenta(request):
@@ -299,38 +306,43 @@ def eliminar_proveedor(request, id):
     proveedor.delete()
     messages.success(request, "el proveedor a sido eliminado")
     return redirect(to="listar_proveedor")
-
-def cuenta(request):
-    return render(request,"cuenta-user/cuenta.html")
+ 
 
 def carrito(request):
     return render(request, "carrito-compras/carrito.html")
 
 def agregar_carrito(request, producto_id):
-     if request.method == 'POST':
+    if request.method == 'POST':
         cantidad = int(request.POST.get('cantidad', 0))
         producto = get_object_or_404(Producto, id=producto_id)
         carrito = Carrito(request)
         carrito.agregar(producto, cantidad)
         return redirect(reverse("pagina_1"))
-     return redirect(reverse("pagina_1"))
+    return redirect(reverse("carrito"))
+
 
 def eliminar_carrito(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.eliminar(producto)
-    return redirect(reverse("pagina_1"))
+    return redirect(reverse("carrito"))
 
 def restar_carrito(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.restar(producto)
-    return redirect(reverse("pagina_1"))
+    return redirect(reverse("carrito"))
 
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
-    return redirect(reverse("pagina_1"))
+    return redirect(reverse("carrito"))
+
+def sumar_carrito(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.sumar(producto)
+    return redirect(reverse("carrito"))
 
 def checkout(request):
     carrito = Carrito(request)

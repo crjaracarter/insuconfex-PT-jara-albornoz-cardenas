@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zg9%h98^j(e4)1+73cyj2487ejr6&w%_j57d)n1&0x&qjy9%dq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -138,6 +138,15 @@ import os
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sr.crisllet@gmail.com'
+EMAIL_HOST_PASSWORD = 'wlwcqaukggrszyxi'
+EMAIL_FILE_PATH = "/tmp/app-messages" # change this to a proper location
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

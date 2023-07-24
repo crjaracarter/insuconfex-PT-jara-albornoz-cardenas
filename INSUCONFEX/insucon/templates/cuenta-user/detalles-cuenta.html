@@ -64,16 +64,11 @@
           <header data-role="Header" class="home-header max-width-container">
             <div class="home-navbar1">
               <div class="home-container01">
-                <img
-                  alt=""
-                  src="{% static 'img/lupa.png' %}"
-                  class="home-image"
-                />
-                <input
-                  type="text"
-                  placeholder="search"
-                  class="home-textinput input"
-                />
+                <form method="POST" class="form-inline">
+                  {% csrf_token %}
+                  <input type="search" placeholder="¿Qué quieres buscar?" class="form-control mr-sm-2" id="buscador" name="buscador" aria-label="Search"/>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
               </div>
               <div class="home-middle">
                 <a class="navbar-logo-title" src="#" href="{% url 'home' %}">INSUCONFEX</a>
@@ -137,14 +132,20 @@
                   </div>
                 </div>
                 <div class="home-middle1">
-                  <a class="home-text01" href="{% url 'pagina_1' %}">PRODUCTOS</a>
-                  <a class="home-text02" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  <form method="POST" class="form-inline">
+                    {% csrf_token %}
+                    <input type="search" placeholder="¿Qué quieres buscar?" class="form-control mr-sm-2" id="buscador" name="buscador" aria-label="Search"/>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                  </form>
+                  
+                  <a class="home-text02" href="{% url 'pagina_1' %}">PRODUCTOS</a>
+                  <a class="home-text03" href="{% url 'quienes_somos' %}" >NOSOTROS</a>
+                  
                   {% if user.is_authenticated %}
                     <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">Bienvenid@ {{user.username}}</a>
                     {% if user.is_superuser %}
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'administrador' %}">PANEL DE CONTROL</a>
-
                       <a class="dropdown-item" href="{% url 'logout' %}">CERRAR SESION</a>
                     </div>
                     {% endif %}
@@ -161,9 +162,16 @@
                       <a class="dropdown-item" href="{% url 'registro' %}">REGISTRATE</a>
                     </div>
                   {% endif %} 
-
-                  
-                  
+                  <div class="home-text03">
+                    <a class="btn btn-warning" href="{% url 'carrito' %}">
+                      <img
+                        alt="iconsbxscart3271299"
+                        src="{% static 'img/icons8-shopping-cart-32.png' %}"
+                        class="home-image1"
+                         
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -174,81 +182,81 @@
 
 
         
-    <div class="home-main">
-        <div class="home-hero section-container">
-          <div class="home-max-width max-width-container">
-            <div class="home-hero1">
-              <div class="home-container03">
-                <div class="home-info">
-                  
-                  
-                  <span class="home-text16 Heading-1">
-                    <span>Mi cuenta</span>
+        <div class="home-main">
+          <div class="home-hero section-container">
+            <div class="home-max-width max-width-container">
+              <div class="home-hero1">
+                <div class="home-container03">
+                  <div class="home-info">
                     
-                  </span>
+                    
+                    <span class="home-text16 Heading-1">
+                      <span>Mi cuenta</span>
+                      
+                    </span>
+                  </div>
+                  <h1 ></h1>
+                  <div class="home-container04">
+                    <span class="home-text17"></span>
+                    <span class="home-text18">Aquí podrás ver todos los detalles de la página</span>
+                  </div>
+                  
                 </div>
-                <h1 ></h1>
-                <div class="home-container04">
-                  <span class="home-text17"></span>
-                  <span class="home-text18">Aquí podrás ver todos los detalles de la página</span>
-                </div>
-                
+                <img
+                  alt="image23271449"
+                  src="{%static 'img/ctusuario.png' %}"
+                  class="cuenta-image1"
+                />
               </div>
-              <img
-                alt="image23271449"
-                src="{%static 'img/ctusuario.png' %}"
-                class="cuenta-image1"
-              />
             </div>
           </div>
-        </div>
-        <div class="section-container column">
-          <div class="row">
-            {%load static %}
-            <div style="flex:1 0 25%;max-width:25%;width: 25%;border-right:1px solid rgba(119, 119, 119, 0.2);padding:10px 30px;box-sizing:border-box;margin:0px;border: 0px;vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-              <h3 style="font-size:18px;padding-left:15px;padding-right:10px;padding-bottom:10px;margin-bottom:15px;text-transform:uppercase;border-bottom:1px solid rgba(119, 119, 119, 0.2);display:block;color:rgb(36, 36, 36);font-weight:400;font-style:normal;font-family:Poppins, sans-serif;line-height:25.2px;box-sizing:border-box;margin:0px 0px 15px;padding:0px 10px 10px 15px;border: 0px;vertical-align:baseline;font-variant:normal;font-stretch:100%;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">
-                  Mi cuenta </h3>
-              <nav style="margin-bottom:30px;display:block;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-                  <ul style="list-style:outside none none;--li-pl: 0;--list-mb: 0;--li-mb: 0;margin-bottom:0px;padding-left:0px;box-sizing:border-box;margin:0px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-                      <li style=" margin-bottom:0px;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-                          <a href="{% url 'cuenta' %}" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">General</a>
-                      </li>
-                      <li style="background-color: gainsboro; margin-bottom:0px;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-                          <a href="#" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">detalles de la cuenta</a>
-                      </li>
-                      
-                      <li style="border-bottom:0px none rgb(86, 86, 86);margin-bottom:0px;box-sizing:border-box;margin:0px;padding:0px;vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-                          <a href="{% url 'logout' %}" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">Cerrar sesión</a>
-                      </li>
-                  </ul>
-              </nav>
+          <div class="section-container column">
+            <div class="row">
+              {%load static %}
+              <div style="flex:1 0 25%;max-width:25%;width: 25%;border-right:1px solid rgba(119, 119, 119, 0.2);padding:10px 30px;box-sizing:border-box;margin:0px;border: 0px;vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                <h3 style="font-size:18px;padding-left:15px;padding-right:10px;padding-bottom:10px;margin-bottom:15px;text-transform:uppercase;border-bottom:1px solid rgba(119, 119, 119, 0.2);display:block;color:rgb(36, 36, 36);font-weight:400;font-style:normal;font-family:Poppins, sans-serif;line-height:25.2px;box-sizing:border-box;margin:0px 0px 15px;padding:0px 10px 10px 15px;border: 0px;vertical-align:baseline;font-variant:normal;font-stretch:100%;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">
+                    Mi cuenta </h3>
+                <nav style="margin-bottom:30px;display:block;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                    <ul style="list-style:outside none none;--li-pl: 0;--list-mb: 0;--li-mb: 0;margin-bottom:0px;padding-left:0px;box-sizing:border-box;margin:0px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                        <li style=" margin-bottom:0px;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                            <a href="{% url 'cuenta' %}" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">General</a>
+                        </li>
+                        <li style="background-color: gainsboro; margin-bottom:0px;box-sizing:border-box;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                            <a href="#" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">detalles de la cuenta</a>
+                        </li>
+                        
+                        <li style="border-bottom:0px none rgb(86, 86, 86);margin-bottom:0px;box-sizing:border-box;margin:0px;padding:0px;vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+                            <a href="{% url 'logout' %}" style="display:block;padding:10px 15px;color:rgba(0, 0, 0, 0.9);line-height:20px;text-transform:none;font-size:14px;font-weight:600;text-decoration:none solid rgba(0, 0, 0, 0.9);transition:all 0.25s ease 0s;touch-action:manipulation;box-sizing:border-box;margin:0px;border:0px none rgba(0, 0, 0, 0.9);vertical-align:baseline;font-style:normal;font-variant:normal;font-stretch:100%;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div style="flex:1 0 75%;max-width:75%;width: 75%;padding:10px 30px;box-sizing:border-box;margin:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
+              <div style="display:none;box-sizing:border-box;margin:0px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;"></div>
+              <p style="font-size:17.6px;margin-bottom:20px;box-sizing:border-box;margin:0px 0px 20px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:28.16px;font-family:'DM Sans', sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">
+                  ¡Aca tienes todos tus datos, donde puedes modificarlos!.</p>
+  
+                  <div class="card mx-auto">
+                    <div class="card-body my-3 mx-3 ">
+                        <h2>Datos de {{ user.username }}</h2>
+                        <div class="card my-1 mx-1">
+                          <span class="home-text01 mt-2 ml-2">Nombre: {{ perfil.nombre }}</span>
+                          <span class="home-text01 ml-2">Apellido: {{ perfil.apellido }}</span>
+                          <span class="home-text01 ml-2">Celular: {{ perfil.celular }}</span>
+                          <span class="home-text01 ml-2">Dirección: {{ perfil.direccion }}</span>
+                          <span class="home-text01 ml-2 mb-2">Comuna: {{ perfil.comuna }}</span>
+                        </div>
+                        <a href="{% url 'modificar_cuenta' pk=perfil.id %}" class="btn btn-info btn-sm">Modificar</a>
+                    </div>
+                </div>
+              
           </div>
-          <div style="flex:1 0 75%;max-width:75%;width: 75%;padding:10px 30px;box-sizing:border-box;margin:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;">
-            <div style="display:none;box-sizing:border-box;margin:0px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:25.6px;font-family:'DM Sans', Arial, Helvetica, sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;font-size:16px;"></div>
-            <p style="font-size:17.6px;margin-bottom:20px;box-sizing:border-box;margin:0px 0px 20px;padding:0px;border:0px none rgb(86, 86, 86);vertical-align:baseline;font-style:normal;font-variant:normal;font-weight:400;font-stretch:100%;line-height:28.16px;font-family:'DM Sans', sans-serif;font-optical-sizing:auto;font-kerning:auto;font-feature-settings:normal;font-variation-settings:normal;">
-                ¡Aca tienes todos tus datos, donde puedes modificarlos!.</p>
-
-                <div class="card mx-auto">
-                  <div class="card-body my-3 mx-3 ">
-                      <h2>Datos de {{ user.username }}</h2>
-                      <div class="card my-1 mx-1">
-                        <span class="home-text01 mt-2 ml-2">Nombre: {{ perfil.nombre }}</span>
-                        <span class="home-text01 ml-2">Apellido: {{ perfil.apellido }}</span>
-                        <span class="home-text01 ml-2">Celular: {{ perfil.celular }}</span>
-                        <span class="home-text01 ml-2">Dirección: {{ perfil.direccion }}</span>
-                        <span class="home-text01 ml-2 mb-2">Comuna: {{ perfil.comuna }}</span>
-                      </div>
-                      <a href="{% url 'modificar_cuenta' %}" class="mt-3 btn btn-info btn-sm">Modificar</a>
-                  </div>
-              </div>
-            
+          
+          
+  
         </div>
-        
-        
-
       </div>
     </div>
-  </div>
 
       
         
@@ -266,22 +274,25 @@
             </div>
               <div class="home-links-container">
                 <div class="home-container10">
-                  <span class="home-text2" >Acerca De</span>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">información Empresa</a>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Productos</a>
-                  <a class="home-text1" href="{% url 'quienes_somos' %}">Información Proveedores</a>
+                  <span class="home-text2">Nosotros</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'quienes_somos' %}">¿Quiénes Somos?</a>
+                  <a class="home-text1" href="{% url 'pagina_1' %}">Nuestros Productos</a>
+                  
                 </div>
                 <div class="home-container10">
-                  <span class="home-text2">Cuenta</span>
-                  <a class="home-text1" href="{% url 'login' %}">Inicio de sesión</a>
+                  <span class="home-text2">Tu Cuenta</span>
+                  <br>
+                  <a class="home-text1" href="{% url 'login' %}">Iniciar Sesión</a>
                   <a class="home-text1" href="{% url 'registro' %}" >Registrarse</a>
 
                 </div>
                 <div class="home-container10">
                   <span class="home-text2">Contacto</span>
-                  <span class="home-text1">(671) 555-0110</span>
+                  <br>
+                  <span class="home-text1">(2) 2560 6900</span>
                   <span class="home-text1">contact@Insuconfex.com</span>
-                  <span class="home-text1">1234 Calle Falsa. La Pintana, Santiago, RM</span>
+                  <span class="home-text1">Av. Esq. Blanca 501, Maipú, Región Metropolitana</span>
                 </div>
               </div>
             </footer>
