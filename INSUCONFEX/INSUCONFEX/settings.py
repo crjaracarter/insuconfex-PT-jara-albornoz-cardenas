@@ -145,7 +145,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sr.crisllet@gmail.com'
-EMAIL_HOST_PASSWORD = 'wlwcqaukggrszyxi'
+EMAIL_HOST_PASSWORD = '' #Aquí poner la contraseña especial, preguntar a Cristian por ella o crea tú una nueva con tu correo.
 EMAIL_FILE_PATH = "/tmp/app-messages" # change this to a proper location
 
 # Default primary key field type
