@@ -1,6 +1,6 @@
 # INSUCONFEX - Sistema de Gestión Web
 
-Sistema web desarrollado con Django Framework para la gestión de [breve descripción del propósito del sistema].
+E-commerce web desarrollado con Django Framework | Sistema web comercial
 
 ## 🔧 Requisitos Previos
 
