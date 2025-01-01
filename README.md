@@ -11,7 +11,7 @@ E-commerce web desarrollado con Django Framework | Sistema web comercial
 
 1. Clonar el repositorio
 ```bash
-git clone [[URL_DEL_REPOSITORIO](https://github.com/crjaracarter/insuconfex-PT-jara-albornoz-cardenas.git)]
+git clone [URL_DEL_REPOSITORIO](https://github.com/crjaracarter/insuconfex-PT-jara-albornoz-cardenas.git)
 cd INSUCONFEX
 ```
 
